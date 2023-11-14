@@ -1,0 +1,11 @@
+config:
+  name: app-name
+  dockerImage: image-uri
+  secretId: path/secret # exple: dev/frontend-dashboard
+  secretAgent: agent-image-uri
+  envName: dev
+  awsRegion: us-east-1
+  tagVersion: id #commit id
+
+ingress:
+  host: URL # example app_name.dev.brikl.com
