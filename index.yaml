@@ -3,12 +3,12 @@ entries:
   nodejs-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-12-11T13:02:17.227604-03:00"
+    created: "2023-12-11T16:03:15.004677-03:00"
     description: A Helm chart for Kubernetes
-    digest: a5409e47a85c394f4f049a63181120ee00df6a360b3a223b9cf23e7828ef4540
+    digest: 27567995d90b6848c8f3766466767ab006f8559ddb2abc557385023a7c0a438c
     name: nodejs-chart
     type: application
     urls:
     - charts/nodejs-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-11T13:02:17.226747-03:00"
+generated: "2023-12-11T16:03:15.004351-03:00"
