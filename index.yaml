@@ -2,18 +2,18 @@ apiVersion: v1
 entries:
   golang-chart:
   - apiVersion: v1
-    created: "2023-12-12T10:22:26.172061-03:00"
+    created: "2023-12-12T10:39:19.862534-03:00"
     description: brikl storefront application
     digest: 339675b576e7f3977f1432d5c01ba20f5f4cfd636ca999e42918a869f21031f9
     name: golang-chart
     type: application
     urls:
-    - golang-chart-1.0.0.tgz
+    - charts/golang-chart-1.0.0.tgz
     version: 1.0.0
   nodejs-chart:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2023-12-12T10:22:26.172393-03:00"
+    created: "2023-12-12T10:39:19.862927-03:00"
     description: A Helm chart for Kubernetes
     digest: 475fa8ef92e08d01e142726cb36e8796e062f695aeee93441d41710653f3dd42
     name: nodejs-chart
@@ -21,4 +21,4 @@ entries:
     urls:
     - charts/nodejs-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2023-12-12T10:22:26.171011-03:00"
+generated: "2023-12-12T10:39:19.861289-03:00"
