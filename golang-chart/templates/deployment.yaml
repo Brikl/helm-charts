@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.config.name }}
+  labels:
+    app: {{ .Values.config.name }}
+    env: {{ .Values.config.envName }}
+    tag: {{ .Values.config.tagVersion }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.config.name }}
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.config.name }}
+        tier: backend
+    spec:
+      nodeSelector:
+        alpha.eksctl.io/nodegroup-name: frontend
+      initContainers:
+        - name: get-secret
+          image: {{ .Values.config.secretAgent}}
+          command: ["/bin/sh", "-c"]
+          args: ["get-secrets $SECRET_ID && cp /sm/config/envvars /shared/sm/config"]
+          imagePullPolicy: Always
+          volumeMounts:
+          - name: {{ .Values.config.name }}-tmp-config
+            mountPath: /shared/sm/config
+          env:
+          - name: SECRET_ID
+            value: {{ .Values.config.secretId }}
+          - name: AWS_DEFAULT_REGION
+            value: {{ .Values.config.awsRegion }}   
+      containers:
+      - name: {{ .Values.config.name }}
+        image: {{ .Values.config.dockerImage }}
+        command: ["/bin/bash", "-c"]
+        args: ["source /shared/sm/config/envvars && /app/brikl-store-webserver"]
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - name: {{ .Values.config.name }}-tmp-config
+          mountPath: /shared/sm/config
+      volumes: 
+      - name: {{ .Values.config.name }}-tmp-config
+        emptyDir: {}

@@ -1,0 +1,17 @@
+job:
+  name: ${APP_NAME}
+  image: ${DB_MIGRATION}
+  vesion: ${BUILD_NUMBER}
+
+config:
+  name: ${APP_NAME}
+  dockerImage: ${DOCKER_IMAGE}
+  secretId: ${SECRET_ID}
+  secretAgent: ${SECRET_AGENT}
+  envName: ${ENV_NAME}
+  awsRegion: ${AWS_REGION}
+  tagVersion: ${TAG_VERSION}
+  dbMigration: ${DB_MIGRATION}
+
+ingress:
+  host: ${INGRESS_HOST}
