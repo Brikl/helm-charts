@@ -9,3 +9,4 @@ config:
 
 ingress:
   host: URL # example app_name.dev.brikl.com
+  class: class # example: nginx
