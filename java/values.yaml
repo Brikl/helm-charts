@@ -1,0 +1,29 @@
+config:
+  name: null
+  dockerImage: null
+  secretId: null
+  secretAgent: null
+  envName: null
+  awsRegion: null
+  tagVersion: null
+  dbMigration: null
+
+deployment: 
+  replicas: 2
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 2048M
+    limits:
+      cpu: 2000m
+      memory: 3072M
+  javaOpts: "-Xms1638m -Xmx1843m"
+
+job:
+  enabled: true
+  name: null
+  image: null
+  version: null
+  
+ingress:
+  host: null
