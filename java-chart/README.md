@@ -22,6 +22,7 @@ A Helm chart for Java apps
 | deployment.resources.limits.memory | string | `"3072M"` |  |
 | deployment.resources.requests.cpu | string | `"1000m"` |  |
 | deployment.resources.requests.memory | string | `"2048M"` |  |
+| hpa.enabled | bool | `false` |  |
 | ingress.host | string | `nil` |  |
 | job.enabled | bool | `true` |  |
 | job.image | string | `nil` |  |

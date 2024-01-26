@@ -27,3 +27,6 @@ job:
   
 ingress:
   host: null
+
+hpa:
+  enabled: false
