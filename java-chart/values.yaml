@@ -17,7 +17,6 @@ deployment:
     limits:
       cpu: 2000m
       memory: 3072M
-  javaOpts: "-Xms1638m -Xmx1843m"
 
 job:
   enabled: true

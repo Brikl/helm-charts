@@ -40,14 +40,11 @@ spec:
         command: ["/bin/bash", "-c"]
         args: ["source /shared/sm/config/envvars && java -jar /app.jar"]
         imagePullPolicy: Always
-        env:
-          - name: JAVA_OPTS
-            value: {{ .Values.deployment.javaOpts }}
         ports:
         - containerPort: 8080
           protocol: TCP
         resources:
-          {{ toYaml .Values.deployment.resources | indent 12 }}
+{{ toYaml .Values.deployment.resources | indent 12 }}
         volumeMounts:
         - name: {{ .Values.config.name }}-tmp-config
           mountPath: /shared/sm/config
