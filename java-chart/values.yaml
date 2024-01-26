@@ -30,3 +30,4 @@ ingress:
 
 hpa:
   enabled: false
+  
