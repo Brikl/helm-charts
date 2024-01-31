@@ -9,4 +9,5 @@ config:
 
 ingress:
   host: ${INGRESS_HOST}
+  host2: ${INGRESS_HOST2}
   class: ${INGRESS_CLASS}

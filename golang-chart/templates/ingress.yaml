@@ -19,3 +19,13 @@ spec:
               number: 8080
         path: /
         pathType: Prefix
+  - host: {{ .Values.ingress.host2 }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ .Values.config.name }}-service
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
