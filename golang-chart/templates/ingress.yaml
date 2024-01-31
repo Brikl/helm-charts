@@ -6,6 +6,10 @@ metadata:
     app: {{ .Values.config.name }}
     env: {{ .Values.config.envName }}
     tag: {{ .Values.config.tagVersion }}
+  annotations:
+    nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
 spec:
   ingressClassName: {{ .Values.ingress.class }}
   rules:
