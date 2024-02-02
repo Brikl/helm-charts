@@ -20,9 +20,9 @@ spec:
     spec:
       nodeSelector:
         alpha.eksctl.io/nodegroup-name: backend-application
-      {{- if .Values.secrets_sa.enabled -}}
+{{- if .Values.secrets_sa.enabled -}}
       serviceAccountName: {{ .Values.config.name }}-sa
-      {{- end -}}
+{{- end -}}
       initContainers:
         - name: get-secret
           image: {{ .Values.config.secretAgent}}
