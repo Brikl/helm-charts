@@ -29,4 +29,7 @@ ingress:
 
 hpa:
   enabled: false
+
+secrets_sa:
+  enabled: false
   
