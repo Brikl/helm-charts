@@ -16,7 +16,6 @@ A Helm chart for Java apps
 | config.secretAgent | string | `nil` |  |
 | config.secretId | string | `nil` |  |
 | config.tagVersion | string | `nil` |  |
-| deployment.javaOpts | string | `"-Xms1638m -Xmx1843m"` |  |
 | deployment.replicas | int | `2` |  |
 | deployment.resources.limits.cpu | string | `"2000m"` |  |
 | deployment.resources.limits.memory | string | `"3072M"` |  |
