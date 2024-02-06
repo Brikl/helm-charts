@@ -31,5 +31,7 @@ hpa:
   enabled: false
 
 secrets_sa:
+  irsa_enabled: false
+  irsa_role_arn: null
   enabled: false
   
