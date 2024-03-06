@@ -17,7 +17,9 @@ deployment:
     limits:
       cpu: 2000m
       memory: 3072M
-
+  args: ["source /shared/sm/config/envvars && java -jar /app.jar"]
+  nodeSelector: null
+    
 job:
   enabled: true
   name: null
@@ -25,11 +27,16 @@ job:
   version: null
   
 ingress:
+  className: nginx-public
   host: null
 
 hpa:
   enabled: false
 
-secrets_sa:
+sa:
   enabled: false
+  awsRoleArn: null
+  secretsClusterRoleEnabled: false
+
+
   

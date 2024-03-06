@@ -18,11 +18,13 @@ spec:
         app: {{ .Values.config.name }}
         tier: backend
     spec:
+{{ if .Values.deployment.nodeSelector }}
       nodeSelector:
-        alpha.eksctl.io/nodegroup-name: backend-application
-{{ if .Values.secrets_sa.enabled }}
+{{ toYaml .Values.deployment.nodeSelector | indent 8 }}
+{{ end }}
+{{ if .Values.sa.enabled }}
       serviceAccountName: {{ .Values.config.name }}-sa
-{{ end }} 
+{{ end }}
       initContainers:
         - name: get-secret
           image: {{ .Values.config.secretAgent}}
@@ -41,7 +43,7 @@ spec:
       - name: {{ .Values.config.name }}
         image: {{ .Values.config.dockerImage }}
         command: ["/bin/bash", "-c"]
-        args: ["source /shared/sm/config/envvars && java -jar /app.jar"]
+        args: {{ .Values.deployment.args }}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
