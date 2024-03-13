@@ -2,4 +2,4 @@ apiVersion: v1
 name: java-chart
 description: A Helm chart for Java apps
 type: application
-version: 0.1.0
+version: 0.2.0
