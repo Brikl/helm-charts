@@ -1,11 +1,18 @@
-{{- if .Values.secrets_sa.enabled -}}
+{{- if .Values.sa.enabled -}}
 # RBAC (service account + role + role binding)
 ## Service Account
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: {{ .Values.config.name }}-sa
+{{ if .Values.sa.awsRoleArn }}
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-weight: "-10"
+    eks.amazonaws.com/role-arn: {{ .Values.sa.awsRoleArn }}
+{{ end }}  
 automountServiceAccountToken: true
+{{ if .Values.sa.secretsClusterRoleEnabled }}
 ---
 ## ClusterRole (update existing secret or create a new one, and create ingress)
 apiVersion: rbac.authorization.k8s.io/v1
@@ -36,5 +43,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.config.name }}-sa
-  namespace: {{ .Values.config.namespace }}
+  namespace: {{.Release.Namespace}}
+{{ end }}  
 {{- end -}}

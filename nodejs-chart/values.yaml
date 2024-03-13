@@ -1,12 +1,21 @@
 config:
-  name: app-name
-  dockerImage: image-uri
-  secretId: path/secret # exple: dev/frontend-dashboard
-  secretAgent: agent-image-uri
-  envName: dev
-  awsRegion: us-east-1
-  tagVersion: id #commit id
+  name: null
+  dockerImage: null
+  secretId: null
+  secretAgent: null
+  envName: null
+  awsRegion: null
+  tagVersion: null
 
 ingress:
-  host: URL # example app_name.dev.brikl.com
-  class: class # example: nginx
+  className: nginx-public
+  host: null # example app_name.dev.brikl.com
+
+deployment:
+  replicas: 1
+  args: ["source /shared/sm/config/envvars && node server.js"]
+  nodeSelector: null
+    
+sa:
+  enabled: false
+  awsRoleArn: null    
