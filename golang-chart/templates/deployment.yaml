@@ -18,8 +18,6 @@ spec:
         app: {{ .Values.config.name }}
         tier: backend
     spec:
-      nodeSelector:
-        alpha.eksctl.io/nodegroup-name: frontend
       initContainers:
         - name: get-secret
           image: {{ .Values.config.secretAgent}}
