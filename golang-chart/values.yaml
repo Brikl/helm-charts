@@ -16,9 +16,9 @@ ingressHostMulti:
   enabled: false
 
 ingress:
-  host: ${INGRESS_HOST}
-  host2: ${INGRESS_HOST2} #optional
-  class: ${INGRESS_CLASS}
+  host: null
+  host2: null #optional
+  class: nginx-public
 
 sa:
   enabled: true
