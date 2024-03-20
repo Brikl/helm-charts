@@ -7,6 +7,11 @@ config:
   awsRegion: ${AWS_REGION}
   tagVersion: ${TAG_VERSION}
 
+deployment:
+  replicas: 1
+  args: ["source /shared/sm/config/envvars && /app/brikl-store-webserver"]
+  nodeSelector: null
+
 ingressHostMulti:
   enabled: false
 

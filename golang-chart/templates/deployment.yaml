@@ -11,13 +11,17 @@ spec:
     matchLabels:
       app: {{ .Values.config.name }}
       tier: backend
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   template:
     metadata:
       labels:
         app: {{ .Values.config.name }}
         tier: backend
     spec:
+{{ if .Values.deployment.nodeSelector }}
+      nodeSelector:
+{{ toYaml .Values.deployment.nodeSelector | indent 8 }}
+{{ end }}
       initContainers:
         - name: get-secret
           image: {{ .Values.config.secretAgent}}
@@ -36,7 +40,7 @@ spec:
       - name: {{ .Values.config.name }}
         image: {{ .Values.config.dockerImage }}
         command: ["/bin/bash", "-c"]
-        args: ["source /shared/sm/config/envvars && /app/brikl-store-webserver"]
+        args: {{ .Values.deployment.args }}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
