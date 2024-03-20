@@ -7,7 +7,13 @@ config:
   awsRegion: ${AWS_REGION}
   tagVersion: ${TAG_VERSION}
 
+ingressHostMulti:
+  enabled: false
+
 ingress:
   host: ${INGRESS_HOST}
-  host2: ${INGRESS_HOST2}
+  host2: ${INGRESS_HOST2} #optional
   class: ${INGRESS_CLASS}
+
+sa:
+  enabled: true

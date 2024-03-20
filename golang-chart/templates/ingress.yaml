@@ -23,6 +23,7 @@ spec:
               number: 8080
         path: /
         pathType: Prefix
+{{ if .Values.ingressHostMulti.enabled }}
   - host: {{ .Values.ingress.host2 }}
     http:
       paths:
@@ -33,3 +34,4 @@ spec:
               number: 8080
         path: /
         pathType: Prefix
+{{ end }}

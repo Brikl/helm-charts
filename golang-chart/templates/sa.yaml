@@ -1,0 +1,15 @@
+{{- if .Values.sa.enabled -}}
+# RBAC (service account + role + role binding)
+## Service Account
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Values.config.name }}-sa
+{{ if .Values.sa.awsRoleArn }}
+  annotations:
+    helm.sh/hook: pre-install
+    helm.sh/hook-weight: "-10"
+    eks.amazonaws.com/role-arn: {{ .Values.sa.awsRoleArn }}
+{{ end }}  
+automountServiceAccountToken: true
+{{- end -}}
