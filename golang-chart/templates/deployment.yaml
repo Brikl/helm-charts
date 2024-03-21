@@ -22,6 +22,9 @@ spec:
       nodeSelector:
 {{ toYaml .Values.deployment.nodeSelector | indent 8 }}
 {{ end }}
+{{ if .Values.sa.enabled }}
+      serviceAccountName: {{ .Values.config.name }}-sa
+{{ end }}
       initContainers:
         - name: get-secret
           image: {{ .Values.config.secretAgent}}
