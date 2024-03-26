@@ -11,6 +11,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     path: {{ .Values.volume.path }}
-    server:
-      - {{ .Values.volume.server }}
+    server: {{ .Values.volume.server }}
 {{- end }}
