@@ -1,0 +1,15 @@
+{{- if .Values.volume.enabled }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.config.name }}-pvc
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: {{ .Values.volume.size }}
+  selector:
+    matchLabels:
+      type: {{ .Values.config.name }}-pvc
+{{- end }}

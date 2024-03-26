@@ -50,7 +50,16 @@ spec:
           protocol: TCP
         volumeMounts:
         - name: {{ .Values.config.name }}-tmp-config
-          mountPath: /shared/sm/config
+          mountPath: /shared/sm/
+        {{- if .Values.volume.enabled }}
+        - name: {{ .Values.config.name }}-certs
+          mountPath: {{ .Values.volume.path }}
+        {{- end }} 
       volumes: 
       - name: {{ .Values.config.name }}-tmp-config
         emptyDir: {}
+      {{- if .Values.volume.enabled }}
+      - name: {{ .Values.config.name }}-certs
+        persistentVolumeClaim:
+          claimName: {{ .Values.config.name }}-pvc
+      {{- end }}
