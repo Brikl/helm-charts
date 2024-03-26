@@ -23,4 +23,8 @@ brikl storefront application
 | ingress.host2 | string | `nil` |  |
 | ingressHostMulti.enabled | bool | `false` |  |
 | sa.enabled | bool | `true` |  |
+| volume.enabled | bool | `true` |  |
+| volume.path | string | `nil` |  |
+| volume.server | string | `nil` |  |
+| volume.size | string | `"10Gi"` |  |
 
