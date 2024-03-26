@@ -22,3 +22,9 @@ ingress:
 
 sa:
   enabled: true
+
+volume:
+  enabled: true
+  size: 10Gi
+  server: null
+  path: null
