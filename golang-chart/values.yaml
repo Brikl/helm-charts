@@ -19,6 +19,7 @@ ingress:
   host: null
   host2: null #optional
   class: nginx-public
+  externalDnsEnabled: false
 
 sa:
   enabled: true
