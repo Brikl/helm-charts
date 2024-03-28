@@ -9,6 +9,9 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/from-to-www-redirect: "true"
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+{{if .Values.ingress.externalDnsEnabled -}}    
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
+{{ end }}    
 
 spec:
   ingressClassName: {{ .Values.ingress.class }}

@@ -10,6 +10,7 @@ config:
 ingress:
   className: nginx-public
   host: null # example app_name.dev.brikl.com
+  externalDnsEnabled: false
 
 deployment:
   replicas: 1
