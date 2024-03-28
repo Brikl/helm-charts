@@ -6,6 +6,10 @@ metadata:
     app: {{ .Values.config.name }}
     env: {{ .Values.config.envName }}
     tag: {{ .Values.config.tagVersion }}
+  {{- with .Values.ingress.externalDnsEnabled }}
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
+  {{- end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
