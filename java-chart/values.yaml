@@ -29,6 +29,7 @@ job:
 ingress:
   className: nginx-public
   host: null
+  externalDnsEnabled: false
 
 hpa:
   enabled: false

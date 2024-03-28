@@ -1,6 +1,6 @@
 # java-chart
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
+![Version: 0.2.0](https://img.shields.io/badge/Version-0.2.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square)
 
 A Helm chart for Java apps
 
@@ -25,6 +25,7 @@ A Helm chart for Java apps
 | deployment.resources.requests.memory | string | `"2048M"` |  |
 | hpa.enabled | bool | `false` |  |
 | ingress.className | string | `"nginx-public"` |  |
+| ingress.externalDnsEnabled | bool | `false` |  |
 | ingress.host | string | `nil` |  |
 | job.enabled | bool | `true` |  |
 | job.image | string | `nil` |  |
