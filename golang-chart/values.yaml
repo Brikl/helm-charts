@@ -30,5 +30,5 @@ volume:
   server: null
   path: null
 
-sa:
+lb:
   enabled: false
