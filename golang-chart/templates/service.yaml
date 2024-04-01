@@ -8,6 +8,9 @@ metadata:
     tag: {{ .Values.config.tagVersion }}
 spec:
   selector:
+{{ if .Values.lb.enabled }}
+    type: LoadBalancer
+{{ end }}
     app: {{ .Values.config.name }}
   ports:
     - protocol: TCP
