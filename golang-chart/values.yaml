@@ -31,4 +31,4 @@ volume:
   path: null
 
 sa:
-  enabled: true
+  enabled: false
