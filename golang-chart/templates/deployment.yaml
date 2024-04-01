@@ -50,7 +50,7 @@ spec:
           protocol: TCP
         volumeMounts:
         - name: {{ .Values.config.name }}-tmp-config
-          mountPath: /shared/sm/
+          mountPath: /shared/sm/config
         {{- if .Values.volume.enabled }}
         - name: {{ .Values.config.name }}-certs
           mountPath: {{ .Values.volume.path }}
