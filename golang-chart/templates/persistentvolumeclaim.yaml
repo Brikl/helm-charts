@@ -6,10 +6,8 @@ metadata:
 spec:
   accessModes:
     - ReadWriteMany
+  storageClassName: efs-sc
   resources:
     requests:
       storage: {{ .Values.volume.size }}
-  selector:
-    matchLabels:
-      type: {{ .Values.config.name }}-pvc
 {{- end }}
