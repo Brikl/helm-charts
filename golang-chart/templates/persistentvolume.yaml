@@ -5,7 +5,7 @@ metadata:
   name: {{ .Values.config.name }}-pv
 spec:
   capacity:
-    storage:{{ .Values.volume.size }}
+    storage: {{ .Values.volume.size }}
   volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
