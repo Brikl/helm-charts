@@ -5,11 +5,13 @@ metadata:
   name: {{ .Values.config.name }}-pv
 spec:
   capacity:
-    storage: 10Gi
+    storage:{{ .Values.volume.size }}
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
-  nfs:
-    path: {{ .Values.volume.path }}
-    server: {{ .Values.volume.server }}
+  storageClassName: efs-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: {{ .Values.volume.server }}
 {{- end }}
