@@ -1,0 +1,88 @@
+
+image:
+  repository: "890013126756.dkr.ecr.us-west-2.amazonaws.com/uncs-deploy-api"
+  tag: "latest"
+  pullPolicy: Always
+serviceAccount:
+  create: true
+  serviceAccountCustomName: "api-deploy-common-sa"
+  annotations:
+    eks.amazonaws.com/role-arn: "arn:aws:iam::890013126756:role/IRSA_infra-deploy-sa"
+service:
+  type: ClusterIP
+  port: 9090
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+ingress:
+  enabled: true
+  className: "nginx-public"
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: infradeploy.tools.brikl.com
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: infradeploy.tools.brikl.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+volumes: []
+nodeSelector: {}
+volumeMounts: []
+tolerations: []
+
+affinity: {}
+
+livenessProbe:
+  httpGet:
+    path: /
+    port: http
+readinessProbe:
+  httpGet:
+    path: /
+    port: http
+
+podAnnotations: {}
+podLabels: {}
+securityContext: {}
+podSecurityContext: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+
+apidns:
+  enable: true
+  service:
+    type: ClusterIP
+    port: 9090
+  global:
+    serviceAccountCustomName: "api-deploy-common-sa"
+  replicaCount: 1
+  image:
+    repository: 890013126756.dkr.ecr.us-west-2.amazonaws.com/uncs-deploy-dns
+    tag: "latest"
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+  #nodeSelector: {} 
