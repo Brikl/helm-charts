@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "uncs-deploy-dns.fullname" . }}
+  labels:
+    {{- include "uncs-deploy-dns.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "uncs-deploy-dns.selectorLabels" . | nindent 4 }}
