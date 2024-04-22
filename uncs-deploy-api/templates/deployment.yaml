@@ -39,10 +39,8 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
-            {{- if .Values.apidns.enable }}
             - name: DNS_API_URL
-              value: "http://{{ .Release.Name }}-apidns.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.apidns.service.port }}"
-            {{- end }}
+              value: "http://{{ .Release.Name }}-apidns.{{ .Release.Namespace }}.svc.cluster.local:9090"
             - name: AWS_DYNAMO_TABLE_STATE_NAME
               value: "infra-deploy-state"
             - name: AWS_REGION

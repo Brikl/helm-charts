@@ -2,5 +2,5 @@ dependencies:
 - name: uncs-deploy-dns
   repository: file://./services/uncs-deploy-dns
   version: 0.1.0
-digest: sha256:8ce62dc38de670c202afbf2385a39c841f74307695ae02bfec99dbd62e561fc2
-generated: "2024-04-17T21:23:33.729702-05:00"
+digest: sha256:63743cd81647b011175817d47fed386da3e405e886ce8e9e9695cba7984660be
+generated: "2024-04-22T18:40:45.107853-05:00"

@@ -27,5 +27,6 @@ dependencies:
   - alias: apidns
     name: uncs-deploy-dns
     version: 0.1.0
-    condition: apidns.enable
     repository: file://./services/uncs-deploy-dns
+    tags:
+      - "apidns"
