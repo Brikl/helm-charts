@@ -40,7 +40,7 @@ spec:
           {{- end }}
           env:
             - name: DNS_API_URL
-              value: "http://{{ .Release.Name }}-apidns.{{ .Release.Namespace }}.svc.cluster.local:9090"
+              value: "http://{{ .Values.customdeploy.dnsServicesName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
             - name: AWS_DYNAMO_TABLE_STATE_NAME
               value: "infra-deploy-state"
             - name: AWS_REGION
