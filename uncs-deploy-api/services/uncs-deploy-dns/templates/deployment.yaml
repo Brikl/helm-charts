@@ -26,9 +26,7 @@ spec:
       serviceAccountName: {{ .Values.global.serviceAccountCustomName }}
       containers:
         - name: {{ .Chart.Name }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          #command: ["/bin/bash", "-c"]
-          #args: ["sleep 60m"] #{{ .Values.deployment.args }}
+          image: "{{ .Values.image.repository }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -42,11 +40,11 @@ spec:
           {{- end }}
           env:
             - name: AWS_SSM_PARAMETER_ROLE_ARN
-              value: "arn:aws:ssm:us-west-2:890013126756:parameter/INFRA_DEPLOY_ASSUME_ROLES"
+              value: {{ .Values.confServices.principalEnvs.awsSsmParameterRoleArn }}
             - name: AWS_SSM_PARAMETER_ZONES_ARN
-              value: "arn:aws:ssm:us-west-2:890013126756:parameter/INFRA_DEPLOY_ROUTE53_ZONES"
+              value: {{ .Values.confServices.principalEnvs.awsSsmParameterZonesArn }}
             - name: AWS_REGION
-              value: "us-west-2"
+              value: {{ .Values.confServices.principalEnvs.awsRegion }}
             - name: PORT_APP
               value: "9090"
       {{- with .Values.volumes }}

@@ -109,3 +109,10 @@ affinity: {}
 
 deployment:
   args: ["/server"]
+
+
+confServices:
+ principalEnvs:
+    awsSsmParameterRoleArn: "arn:aws:ssm:us-west-2:pepe:parameter/INFRA_DEPLOY_ASSUME_ROLES"
+    awsSsmParameterZonesArn: "arn:aws:ssm:us-west-2:pepe:parameter/INFRA_DEPLOY_ROUTE53_ZONES"
+    awsRegion: "us-west-2"
