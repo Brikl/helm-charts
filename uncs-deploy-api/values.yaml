@@ -69,6 +69,7 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 customdeploy:
   dnsServicesName: "infra-deploy-uncs-dns-uncs-deploy-dns"
+  irsaServiceName: "infra-deploy-uncs-irsa-uncs-deploy-irsa"
 
 apidns:
   enable: false
