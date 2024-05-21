@@ -41,6 +41,8 @@ spec:
           env:
             - name: DNS_API_URL
               value: "http://{{ .Values.customdeploy.dnsServicesName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
+            - name: IRSA_API_URL
+              value: "http://{{ .Values.customdeploy.irsaServiceName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
             - name: AWS_DYNAMO_TABLE_STATE_NAME
               value: "infra-deploy-state"
             - name: AWS_REGION
