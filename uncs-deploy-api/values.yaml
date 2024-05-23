@@ -70,6 +70,7 @@ autoscaling:
 customdeploy:
   dnsServicesName: "infra-deploy-uncs-dns-uncs-deploy-dns"
   irsaServiceName: "infra-deploy-uncs-irsa-uncs-deploy-irsa"
+  smServiceName: "infra-deploy-uncs-sm-uncs-deploy-sm"
 
 apidns:
   enable: false
