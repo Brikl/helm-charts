@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "uuncs-deploy-database.fullname" . }}
+  name: {{ include "uncs-deploy-database.fullname" . }}
   labels:
-    {{- include "uuncs-deploy-database.labels" . | nindent 4 }}
+    {{- include "uncs-deploy-database.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "uuncs-deploy-database.selectorLabels" . | nindent 6 }}
+      {{- include "uncs-deploy-database.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "uuncs-deploy-database.labels" . | nindent 8 }}
+        {{- include "uncs-deploy-database.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
