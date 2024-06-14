@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "uncs-deploy-api.fullname" . }}
+  name: {{ include "uuncs-deploy-database.fullname" . }}
   labels:
-    {{- include "uncs-deploy-api.labels" . | nindent 4 }}
+    {{- include "uuncs-deploy-database.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "uncs-deploy-api.selectorLabels" . | nindent 6 }}
+      {{- include "uuncs-deploy-database.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,12 +18,12 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "uncs-deploy-api.labels" . | nindent 8 }}
+        {{- include "uuncs-deploy-database.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      serviceAccountName: {{ .Values.serviceAccount.serviceAccountCustomName }}
+      serviceAccountName: {{ .Values.global.serviceAccountCustomName }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}"
@@ -39,18 +39,10 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
           env:
-            - name: DNS_API_URL
-              value: "http://{{ .Values.customdeploy.dnsServicesName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
-            - name: IRSA_API_URL
-              value: "http://{{ .Values.customdeploy.irsaServiceName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
-            - name: SECRET_MANAGER_API_URL
-              value: "http://{{ .Values.customdeploy.smServiceName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
-            - name: DATA_BASE_API_URL
-              value: "http://{{ .Values.customdeploy.databaseServiceName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
-            - name: AWS_DYNAMO_TABLE_STATE_NAME
-              value: "infra-deploy-state"
+            - name: MYSQL_DATABASE_COR_INFO_PARAMETER_ARN
+              value: {{ .Values.confServices.principalEnvs.awsSsmParameterMysqlCredentials }}
             - name: AWS_REGION
-              value: "us-west-2"
+              value: {{ .Values.confServices.principalEnvs.awsRegion }}
             - name: PORT_APP
               value: "9090"
       {{- with .Values.volumes }}
