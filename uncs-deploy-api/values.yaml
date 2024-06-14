@@ -71,6 +71,7 @@ customdeploy:
   dnsServicesName: "infra-deploy-uncs-dns-uncs-deploy-dns"
   irsaServiceName: "infra-deploy-uncs-irsa-uncs-deploy-irsa"
   smServiceName: "infra-deploy-uncs-sm-uncs-deploy-sm"
+  databaseServiceName: "infra-deploy-uncs-database-uncs-deploy-database"
 
 apidns:
   enable: false
