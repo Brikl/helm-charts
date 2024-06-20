@@ -6,10 +6,10 @@ metadata:
     app: {{ .Values.config.name }}
     env: {{ .Values.config.envName }}
     tag: {{ .Values.config.tagVersion }}
-{{if .Values.ingress.externalDnsEnabled -}}    
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+{{if .Values.ingress.externalDnsEnabled -}}    
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
-    nginx.ingress.kubernetes.io/rewrite-target: /api/graphql
 {{ end }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
@@ -22,5 +22,5 @@ spec:
             name: {{ .Values.config.name }}-service
             port:
               number: 8080
-        path: /{{ .Values.config.name }}
+        path: /{{ .Values.config.name }}/(.*)
         pathType: Prefix
