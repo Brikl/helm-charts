@@ -17,7 +17,7 @@ deployment:
     limits:
       cpu: 2000m
       memory: 3072M
-  args: ["source /shared/sm/config/envvars && java -jar /app.jar"]
+  args: ["source /shared/sm/config/envvars && java $JAVA_OPTS -jar /app.jar"]
   nodeSelector: null
     
 job:
