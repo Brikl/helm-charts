@@ -7,7 +7,6 @@ metadata:
     env: {{ .Values.config.envName }}
     tag: {{ .Values.config.tagVersion }}
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
 {{if .Values.ingress.externalDnsEnabled -}}    
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.ingress.host }}
 {{ end }}
@@ -22,5 +21,5 @@ spec:
             name: {{ .Values.config.name }}-service
             port:
               number: 8080
-        path: /{{ .Values.config.name }}/(.*)
+        path: /{{ .Values.config.name }}
         pathType: Prefix
