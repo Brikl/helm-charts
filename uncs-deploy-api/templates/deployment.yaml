@@ -49,6 +49,8 @@ spec:
               value: "http://{{ .Values.customdeploy.databaseServiceName }}.{{ .Release.Namespace }}.svc.cluster.local:9090"
             - name: AWS_DYNAMO_TABLE_STATE_NAME
               value: "infra-deploy-state"
+            - name: AWS_DYNAMO_TABLE_HOSTED_ZONE
+              value: "infra-deploy-dns"
             - name: AWS_REGION
               value: "us-west-2"
             - name: PORT_APP
