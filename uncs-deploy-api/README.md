@@ -15,7 +15,7 @@ A Helm chart for Kubernetes
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
-| apidns.enable | bool | `true` |  |
+| apidns.enable | bool | `false` |  |
 | apidns.global.serviceAccountCustomName | string | `"api-deploy-common-sa"` |  |
 | apidns.image.repository | string | `"890013126756.dkr.ecr.us-west-2.amazonaws.com/uncs-deploy-dns"` |  |
 | apidns.image.tag | string | `"latest"` |  |
@@ -30,6 +30,11 @@ A Helm chart for Kubernetes
 | autoscaling.maxReplicas | int | `100` |  |
 | autoscaling.minReplicas | int | `1` |  |
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| customdeploy.databaseServiceName | string | `"infra-deploy-uncs-database-uncs-deploy-database"` |  |
+| customdeploy.dnsServicesName | string | `"infra-deploy-uncs-dns-uncs-deploy-dns"` |  |
+| customdeploy.ecrServiceName | string | `"infra-deploy-uncs-ecr-uncs-deploy-ecr"` |  |
+| customdeploy.irsaServiceName | string | `"infra-deploy-uncs-irsa-uncs-deploy-irsa"` |  |
+| customdeploy.smServiceName | string | `"infra-deploy-uncs-sm-uncs-deploy-sm"` |  |
 | image.pullPolicy | string | `"Always"` |  |
 | image.repository | string | `"890013126756.dkr.ecr.us-west-2.amazonaws.com/uncs-deploy-api"` |  |
 | image.tag | string | `"latest"` |  |
@@ -59,6 +64,7 @@ A Helm chart for Kubernetes
 | serviceAccount.annotations."eks.amazonaws.com/role-arn" | string | `"arn:aws:iam::890013126756:role/IRSA_infra-deploy-sa"` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.serviceAccountCustomName | string | `"api-deploy-common-sa"` |  |
+| tags.apidns | bool | `false` |  |
 | tolerations | list | `[]` |  |
 | volumeMounts | list | `[]` |  |
 | volumes | list | `[]` |  |
