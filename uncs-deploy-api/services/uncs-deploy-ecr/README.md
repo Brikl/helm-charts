@@ -1,4 +1,4 @@
-# uncs-deploy-dns
+# uncs-deploy-ecr
 
 ![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
@@ -15,12 +15,11 @@ A Helm chart for Kubernetes
 | autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | confServices.principalEnvs.awsRegion | string | `"us-west-2"` |  |
 | confServices.principalEnvs.awsSsmParameterRoleArn | string | `"arn:aws:ssm:us-west-2:pepe:parameter/INFRA_DEPLOY_ASSUME_ROLES"` |  |
-| confServices.principalEnvs.awsSsmParameterZonesArn | string | `"arn:aws:ssm:us-west-2:pepe:parameter/INFRA_DEPLOY_ROUTE53_ZONES"` |  |
 | deployment.args[0] | string | `"/server"` |  |
 | fullnameOverride | string | `""` |  |
 | global.serviceAccountCustomName | string | `"pepe"` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.repository | string | `"890013126756.dkr.ecr.us-west-2.amazonaws.com/uncs-deploy-dns"` |  |
+| image.repository | string | `"890013126756.dkr.ecr.us-west-2.amazonaws.com/infra-deploy-uncs-ecr"` |  |
 | image.tag | string | `"v1"` |  |
 | imagePullSecrets | list | `[]` |  |
 | ingress.annotations | object | `{}` |  |
