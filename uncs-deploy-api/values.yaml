@@ -73,6 +73,7 @@ customdeploy:
   smServiceName: "infra-deploy-uncs-sm-uncs-deploy-sm"
   databaseServiceName: "infra-deploy-uncs-database-uncs-deploy-database"
   ecrServiceName: "infra-deploy-uncs-ecr-uncs-deploy-ecr"
+  sesServiceName: "infra-deploy-uncs-ses-uncs-deploy-ses"
 
 apidns:
   enable: false
