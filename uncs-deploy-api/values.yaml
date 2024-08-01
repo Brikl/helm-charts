@@ -74,6 +74,7 @@ customdeploy:
   databaseServiceName: "infra-deploy-uncs-database-uncs-deploy-database"
   ecrServiceName: "infra-deploy-uncs-ecr-uncs-deploy-ecr"
   sesServiceName: "infra-deploy-uncs-ses-uncs-deploy-ses"
+  githubServiceName: "infra-deploy-uncs-github-uncs-deploy-github"
 
 apidns:
   enable: false
