@@ -40,7 +40,7 @@ spec:
           {{- end }}
           env:
             - name: AWS_SSM_PARAMETER_GITHUB_TOKEN
-              value: {{ .Values.confServices.principalEnvs.awsSsmParameterRoleArn }}
+              value: {{ .Values.confServices.principalEnvs.awsSsmParameterGithub }}
             - name: AWS_REGION
               value: {{ .Values.confServices.principalEnvs.awsRegion }}
             - name: PORT_APP
