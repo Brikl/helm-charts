@@ -18,8 +18,10 @@ A Helm chart for NodeJS apps
 | deployment.args[0] | string | `"source /shared/sm/config/envvars && node server.js"` |  |
 | deployment.nodeSelector | string | `nil` |  |
 | deployment.replicas | int | `1` |  |
+| ingress.certifcateArn | string | `"arn:aws:acm:us-west-2:xxxxxx:certificate/d3b474d2-a4b3-4ccb-a840-c207010137b8"` |  |
 | ingress.className | string | `"nginx-public"` |  |
 | ingress.externalDnsEnabled | bool | `false` |  |
+| ingress.groupName | string | `"core-front"` |  |
 | ingress.host | string | `nil` |  |
 | sa.awsRoleArn | string | `nil` |  |
 | sa.enabled | bool | `false` |  |
