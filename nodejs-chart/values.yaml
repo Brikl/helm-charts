@@ -12,6 +12,7 @@ ingress:
   host: null # example app_name.dev.brikl.com
   externalDnsEnabled: false
   groupName: core-front
+  albActive: true
   certifcateArn: "arn:aws:acm:us-west-2:xxxxxx:certificate/d3b474d2-a4b3-4ccb-a840-c207010137b8"
 
 deployment:
