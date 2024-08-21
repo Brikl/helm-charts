@@ -7,7 +7,9 @@ metadata:
     env: {{ .Values.config.envName }}
     tag: {{ .Values.config.tagVersion }}
 spec:
+{{- if .Values.ingress.albActive }}
   type: NodePort
+{{- end }}
   selector:
     app: {{ .Values.config.name }}
   ports:
