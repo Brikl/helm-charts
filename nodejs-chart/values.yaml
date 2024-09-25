@@ -17,9 +17,22 @@ ingress:
 
 deployment:
   replicas: 1
+  resources:
+    requests:
+      cpu: 1000m
+      memory: 2048M
+    limits:
+      cpu: 2000m
+      memory: 3072M
   args: ["source /shared/sm/config/envvars && node server.js"]
   nodeSelector: null
     
 sa:
   enabled: false
-  awsRoleArn: null    
+  awsRoleArn: null
+
+hpa:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 4
+  targetCpuUse: 50
