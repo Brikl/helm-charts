@@ -10,6 +10,26 @@ config:
 
 deployment: 
   replicas: 2
+  livenessProbe: {}
+  # livenessProbe:
+  #   httpGet:
+  #     path: /test
+  #     port: 8080
+  #   initialDelaySeconds: 5   # Espera 5 segundos antes de empezar a chequear
+  #   periodSeconds: 10        # Cada 10 segundos revisa la salud
+  #   timeoutSeconds: 1        # Si no recibe respuesta en 1 segundo, considera que falló
+  #   failureThreshold: 3      # Si falla 3 veces seguidas, se reinicia el contenedor
+  #   successThreshold: 1      # Debe tener al menos 1 éxito para considerarlo sano
+  readinessProbe: {}
+  # readinessProbe:
+  #   httpGet:
+  #     path: /test
+  #     port: 8080
+  #   initialDelaySeconds: 3   # Espera 3 segundos antes de empezar a chequear si está listo
+  #   periodSeconds: 5         # Cada 5 segundos revisa si está listo para recibir tráfico
+  #   timeoutSeconds: 1        # Si no responde en 1 segundo, falla
+  #   failureThreshold: 3      # Después de 3 fallos consecutivos, deja de enviar tráfico
+  #   successThreshold: 1      # Debe tener al menos 1 éxito para ser considerado listo
   resources:
     requests:
       cpu: 1000m
