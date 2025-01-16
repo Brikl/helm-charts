@@ -38,7 +38,11 @@ spec:
           - name: SECRET_ID
             value: {{ .Values.config.secretId }}
           - name: AWS_DEFAULT_REGION
-            value: {{ .Values.config.awsRegion }}   
+            value: {{ .Values.config.awsRegion }}
+          {{ if .Values.deployment.timezone }}
+          - name: TZ
+            value: {{ .Values.deployment.timezone }}
+          {{- end }}  
       containers:
       - name: {{ .Values.config.name }}
         image: {{ .Values.config.dockerImage }}
@@ -53,11 +57,6 @@ spec:
         volumeMounts:
         - name: {{ .Values.config.name }}-tmp-config
           mountPath: /shared/sm/config
-        {{ if .Values.deployment.timezone }}
-        - name: timezone
-          mountPath: /etc/localtime  
-          subPath: {{ .Values.deployment.timezone }}
-        {{- end }}
       {{- if .Values.deployment.livenessProbe }}
         livenessProbe:
 {{ toYaml .Values.deployment.livenessProbe | indent 10 }}
@@ -70,8 +69,3 @@ spec:
       volumes: 
       - name: {{ .Values.config.name }}-tmp-config
         emptyDir: {}
-      {{ if .Values.deployment.timezone }}
-      - name: timezone
-        hostPath:
-          path: /usr/share/zoneinfo
-      {{- end }}
