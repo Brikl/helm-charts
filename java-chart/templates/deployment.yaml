@@ -53,6 +53,11 @@ spec:
         volumeMounts:
         - name: {{ .Values.config.name }}-tmp-config
           mountPath: /shared/sm/config
+        {{ if .Values.deployment.timezone }}
+        - name: timezone
+          mountPath: /etc/localtime  
+          subPath: {{ .Values.deployment.timezone }}
+        {{- end }}
       {{- if .Values.deployment.livenessProbe }}
         livenessProbe:
 {{ toYaml .Values.deployment.livenessProbe | indent 10 }}
@@ -65,4 +70,8 @@ spec:
       volumes: 
       - name: {{ .Values.config.name }}-tmp-config
         emptyDir: {}
-      
+      {{ if .Values.deployment.timezone }}
+      - name: timezone
+        hostPath:
+          path: /usr/share/zoneinfo
+      {{- end }}
