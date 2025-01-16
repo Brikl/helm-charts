@@ -38,13 +38,18 @@ spec:
           - name: SECRET_ID
             value: {{ .Values.config.secretId }}
           - name: AWS_DEFAULT_REGION
-            value: {{ .Values.config.awsRegion }}   
+            value: {{ .Values.config.awsRegion }}
       containers:
       - name: {{ .Values.config.name }}
         image: {{ .Values.config.dockerImage }}
         command: ["/bin/bash", "-c"]
         args: {{ .Values.deployment.args }}
         imagePullPolicy: Always
+        {{ if .Values.deployment.timezone }}
+        env:
+          - name: TZ
+            value: {{ .Values.deployment.timezone }}
+        {{- end }}  
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -65,4 +70,3 @@ spec:
       volumes: 
       - name: {{ .Values.config.name }}-tmp-config
         emptyDir: {}
-      

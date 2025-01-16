@@ -39,6 +39,7 @@ deployment:
       memory: 3072M
   args: ["source /shared/sm/config/envvars && java $JAVA_OPTS -jar /app.jar"]
   nodeSelector: null
+  timezone: null
     
 job:
   enabled: true
