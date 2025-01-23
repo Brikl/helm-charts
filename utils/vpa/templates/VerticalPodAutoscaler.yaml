@@ -1,0 +1,11 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: {{ .Values.name }}
+spec:
+  targetRef:
+    apiVersion:  {{ .Values.targetRef.apiVersion }}
+    kind:       {{ .Values.targetRef.kind }}
+    name:       {{ .Values.targetRef.name }}
+  updatePolicy:
+    updateMode:  {{ .Values.updateMode }}
