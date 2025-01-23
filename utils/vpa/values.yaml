@@ -1,0 +1,6 @@
+name: null
+targetRef:
+  apiVersion: "apps/v1"
+  kind:       StatefulSet
+  name:       null
+updateMode: "Auto"
