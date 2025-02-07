@@ -1,0 +1,11 @@
+# Default values for gp3-storage-class.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+metadata:
+  name: ebs-sc
+parameters:                                                                                                                                                                                                             
+  type: gp3
+provisioner: ebs.csi.aws.com
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
