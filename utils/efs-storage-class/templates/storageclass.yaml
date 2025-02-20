@@ -9,4 +9,4 @@ volumeBindingMode: {{ .Values.volumeBindingMode }}
 parameters:
   provisioningMode:  {{ .Values.parameters.provisioningMode }}
   fileSystemId: {{ .Values.parameters.fileSystemId }}
-  directoryPerms: {{ .Values.parameters.directoryPerms }}
+  directoryPerms: {{ .Values.parameters.directoryPerms | quote }} 
