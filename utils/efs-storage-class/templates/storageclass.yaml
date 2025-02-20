@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.metadata.name }}
+allowVolumeExpansion: {{ .Values.allowVolumeExpansion }}
+provisioner: {{ .Values.provisioner }}
+reclaimPolicy: {{ .Values.reclaimPolicy }}
+volumeBindingMode: {{ .Values.volumeBindingMode }}
+parameters:
+  provisioningMode:  {{ .Values.parameters.provisioningMode }}
+  fileSystemId: {{ .Values.parameters.fileSystemId }}
+  directoryPerms: {{ .Values.parameters.directoryPerms }}
