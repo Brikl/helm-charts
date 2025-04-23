@@ -1,0 +1,33 @@
+settings:
+  clusterName: null
+aws:
+  defaultInstanceProfile: null
+nodePool:
+  default:
+    requirements:
+    - key: "karpenter.k8s.aws/instance-category"
+      operator: In
+      values: ["c", "m", "r"]
+      minValues: 2
+    - key: "kubernetes.io/arch"
+      operator: In
+      values: ["amd64"]
+    - key: "karpenter.k8s.aws/instance-cpu"
+      operator: In
+      values: ["8", "16"]
+    - key: "karpenter.k8s.aws/instance-hypervisor"
+      operator: In
+      values: ["nitro"]
+    - key: "karpenter.k8s.aws/instance-generation"
+      operator: Gt
+      values: ["2"]
+    - key: "karpenter.sh/capacity-type"
+      operator: In
+      values: ["spot"]
+    - key: "topology.kubernetes.io/zone"
+      operator: In
+      values: ["us-west-2a", "us-west-2b", "us-west-2c"]
+    disruption: 
+      consolidationPolicy: WhenEmpty
+      consolidateAfter: 30s
+  
