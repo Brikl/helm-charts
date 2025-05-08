@@ -1,2 +1,2 @@
-sa: vault-agent-injector
-secret: vault-agent-injector
+sa: vault
+secret: vault-token
