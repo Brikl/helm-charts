@@ -17,6 +17,17 @@ spec:
       labels:
         app: {{ .Values.config.name }}
         tier: backend
+      annotations:
+        vault.hashicorp.com/agent-inject: 'true'
+        vault.hashicorp.com/auth-path: 'auth/{{ .Values.secret.auth }}'
+        vault.hashicorp.com/role: {{ .Values.secret.role }}
+        vault.hashicorp.com/agent-inject-secret-config: '{{ .Values.secret.path }}'
+        vault.hashicorp.com/agent-inject-template-config: |
+          {{ printf "{{- with secret \"%s\" -}}" .Values.secret.path }}
+            {{`{{- range $key, $value := .Data }}`}}
+            export {{`{{ $key }}`}}="{{`{{ $value }}`}}"
+            {{`{{- end }}`}}
+          {{`{{- end }}`}}
     spec:
 {{ if .Values.deployment.nodeSelector }}
       nodeSelector:
@@ -24,21 +35,7 @@ spec:
 {{ end }}
 {{ if .Values.sa.enabled }}
       serviceAccountName: {{ .Values.config.name }}-sa
-{{ end }}
-      initContainers:
-        - name: get-secret
-          image: {{ .Values.config.secretAgent}}
-          command: ["/bin/sh", "-c"]
-          args: ["get-secrets $SECRET_ID && cp /sm/config/envvars /shared/sm/config"]
-          imagePullPolicy: Always
-          volumeMounts:
-          - name: {{ .Values.config.name }}-tmp-config
-            mountPath: /shared/sm/config
-          env:
-          - name: SECRET_ID
-            value: {{ .Values.config.secretId }}
-          - name: AWS_DEFAULT_REGION
-            value: {{ .Values.config.awsRegion }}   
+{{ end }} 
       containers:
       - name: {{ .Values.config.name }}
         image: {{ .Values.config.dockerImage }}
@@ -50,9 +47,3 @@ spec:
           protocol: TCP
         resources:
 {{ toYaml .Values.deployment.resources | indent 12 }}
-        volumeMounts:
-        - name: {{ .Values.config.name }}-tmp-config
-          mountPath: /shared/sm/config
-      volumes: 
-      - name: {{ .Values.config.name }}-tmp-config
-        emptyDir: {}

@@ -8,6 +8,11 @@ config:
   tagVersion: null
   dbMigration: null
 
+
+secret:
+  auth: null
+  path: null
+  
 deployment: 
   replicas: 2
   livenessProbe: {}
@@ -37,7 +42,7 @@ deployment:
     limits:
       cpu: 2000m
       memory: 3072M
-  args: ["source /shared/sm/config/envvars && java $JAVA_OPTS -jar /app.jar"]
+  args: ["source vault/secrets/config && java $JAVA_OPTS -jar /app.jar"]
   nodeSelector: null
   timezone: null
     

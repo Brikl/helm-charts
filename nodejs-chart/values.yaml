@@ -15,6 +15,10 @@ ingress:
   albActive: true
   certifcateArn: "arn:aws:acm:us-west-2:xxxxxx:certificate/d3b474d2-a4b3-4ccb-a840-c207010137b8"
 
+secret:
+  auth: null
+  path: null
+
 deployment:
   replicas: 1
   resources:
@@ -24,7 +28,7 @@ deployment:
     limits:
       cpu: 2000m
       memory: 3072M
-  args: ["source /shared/sm/config/envvars && node server.js"]
+  args: ["source /vault/secrets/config && node server.js"]
   nodeSelector: null
     
 sa:
