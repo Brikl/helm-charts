@@ -28,7 +28,7 @@ deployment:
     limits:
       cpu: 2000m
       memory: 3072M
-  args: ["source vault/secrets/config && node server.js"]
+  args: ["source /vault/secrets/config && node server.js"]
   nodeSelector: null
     
 sa:
