@@ -11,6 +11,12 @@ spec:
     matchLabels:
       app: {{ .Values.config.name }}
       tier: backend
+  replicas: {{ .Values.deployment.replicas }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.config.name }}
+        tier: backend
       annotations:
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/auth-path: 'auth/{{ .Values.secret.auth }}'
@@ -22,12 +28,6 @@ spec:
             export {{`{{ $key }}`}}="{{`{{ $value }}`}}"
             {{`{{- end }}`}}
           {{`{{- end }}`}}
-  replicas: {{ .Values.deployment.replicas }}
-  template:
-    metadata:
-      labels:
-        app: {{ .Values.config.name }}
-        tier: backend
     spec:
 {{ if .Values.deployment.nodeSelector }}
       nodeSelector:
