@@ -10,7 +10,7 @@ spec:
   selector:
     matchLabels:
       app: {{ .Values.config.name }}
-      tier: frontend
+      tier: backend
       annotations:
         vault.hashicorp.com/agent-inject: 'true'
         vault.hashicorp.com/auth-path: 'auth/{{ .Values.secret.auth }}'
@@ -27,7 +27,7 @@ spec:
     metadata:
       labels:
         app: {{ .Values.config.name }}
-        tier: frontend
+        tier: backend
     spec:
 {{ if .Values.deployment.nodeSelector }}
       nodeSelector:
