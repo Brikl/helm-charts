@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.hostName }}
+    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: {{ .Values.name }}
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  rules:
+  - host:  {{ .Values.hostName }}
+    http:
+      paths:
+      - backend:
+          service:
+            name: {{ .Values.serviceName }}
+            port:
+              number: 8080
+        path: /github-webhook/
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: jenkins-devops
+            port:
+              number: 8080
+        path: /sonarqube-webhook/
+        pathType: ImplementationSpecific
