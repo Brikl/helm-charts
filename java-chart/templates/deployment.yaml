@@ -24,7 +24,7 @@ spec:
         vault.hashicorp.com/agent-inject-secret-config: '{{ .Values.secret.path }}'
         vault.hashicorp.com/agent-inject-template-config: |
           {{ printf "{{- with secret \"%s\" -}}" .Values.secret.path }}
-            {{`{{- range $key, $value := .Data }}`}}
+            {{`{{- range $key, $value := .Data.data }}`}}
             export {{`{{ $key }}`}}="{{`{{ $value }}`}}"
             {{`{{- end }}`}}
           {{`{{- end }}`}}      
