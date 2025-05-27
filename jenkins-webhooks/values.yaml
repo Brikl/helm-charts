@@ -1,4 +1,4 @@
 name: jenkins-webhooks
-serviceName: jenkins-devops
-ingressClassName: nginx-public
+serviceName: jenkins
+ingressClassName: nginx
 hostName: null
