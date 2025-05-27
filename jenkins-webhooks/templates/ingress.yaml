@@ -2,6 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
+    acme.cert-manager.io/dns01-edit-in-place: "true"
+    cert-manager.io/cluster-issuer: letsencrypt  
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.hostName }}
     nginx.ingress.kubernetes.io/use-regex: "true"
   name: {{ .Values.name }}
@@ -25,3 +27,7 @@ spec:
               number: 8080
         path: /sonarqube-webhook/
         pathType: ImplementationSpecific
+  tls:
+  - hosts:
+    - {{ .Values.hostName }}
+    secretName: certmanager-tls        
