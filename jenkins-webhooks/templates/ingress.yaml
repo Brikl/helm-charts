@@ -20,7 +20,7 @@ spec:
         pathType: ImplementationSpecific
       - backend:
           service:
-            name: jenkins-devops
+            name: {{ .Values.serviceName }}
             port:
               number: 8080
         path: /sonarqube-webhook/
