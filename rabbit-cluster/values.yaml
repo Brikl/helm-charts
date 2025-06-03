@@ -1,0 +1,33 @@
+clusterConfig:
+  ClusterName: brikl-rabbit
+  replicaCount: 3
+  storageClassName: "premium-rwo"
+  storageSize: 20Gi
+  resources:
+    requests:
+      memory: 1G
+      cpu: 500m
+    limits:
+      memory: 2G
+      cpu: 1000m
+
+secret:
+  username: my-admin
+
+# This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: true
+  className: internal-nginx
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: rabbitmq.internal.qa2.brikl.com
+      paths:
+        - path: /
+          pathType: Prefix
+          rabbitManagementPort: 15672
+  tls:
+   - secretName: certmanager-tls
+     hosts:
+       - rabbitmq.internal.qa2.brikl.com

@@ -1,0 +1,21 @@
+{{- if .Values.cluster.serviceExpose.create -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mysql.fullname" . }}-expose-sa
+  {{- with .Values.cluster.serviceExpose.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3306
+    targetPort: 3306
+    protocol: TCP
+    name: mysql
+  selector:
+    app.kubernetes.io/component: proxysql
+    app.kubernetes.io/instance: {{ include "mysql.fullname" . }}
+    app.kubernetes.io/name: percona-xtradb-cluster
+{{- end }}
