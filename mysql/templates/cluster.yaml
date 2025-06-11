@@ -1,0 +1,64 @@
+apiVersion: pxc.percona.com/v1
+kind: PerconaXtraDBCluster
+metadata:
+  name: {{ include "mysql.fullname" . }}
+  namespace: mysql-operator
+spec:
+  crVersion: 1.13.0
+  secretsName: {{ include "mysql.fullname" . }}-secret
+  allowUnsafeConfigurations: false
+  updateStrategy: SmartUpdate
+  pxc:
+    size: {{ .Values.cluster.replicaCount }}
+    image: percona/percona-xtradb-cluster:8.0.25-15.1
+    configuration: |
+      [mysqld]
+      pxc_strict_mode=PERMISSIVE
+      max_connections=2000
+    resources:
+{{ toYaml .Values.cluster.resources | indent 6 }}
+    volumeSpec:
+      persistentVolumeClaim:
+        storageClassName: {{ .Values.cluster.storage.storageClassName }}
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.cluster.storage.size }}
+    affinity:
+      antiAffinityTopologyKey: "kubernetes.io/hostname"
+    podDisruptionBudget:
+      maxUnavailable: 1
+  proxysql:
+    enabled: true
+    size: {{ .Values.proxy.replicaCount }}
+    image: percona/percona-xtradb-cluster-operator:1.13.0-proxysql
+    configuration: |
+      mysql_variables=
+      {
+        max_connections=2000
+        default_query_timeout=3600000
+        have_ssl=false
+      }
+    resources:
+{{ toYaml .Values.proxy.resources | indent 6 }}
+    volumeSpec:
+      persistentVolumeClaim:
+        storageClassName: {{ .Values.proxy.storage.storageClassName }}
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: {{ .Values.proxy.storage.size }}
+  backup:
+    image: percona/percona-xtradb-cluster-operator:1.13.0-pxc8.0-backup-pxb8.0.32
+    serviceAccountName: {{ .Values.backup.serviceAccount.serviceAccountName }}
+    schedule:
+      - name: "daily-backup"
+        schedule: "0 0 * * *"
+        keep: 3
+        storageName: {{ .Values.backup.storageName }}
+    storages:
+{{ toYaml .Values.backup.storages | indent 6 }}
+  pmm:
+    enabled: true
+    image: percona/pmm-client:2.30.0
+    serverHost: monitoring-service

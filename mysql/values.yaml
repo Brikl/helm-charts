@@ -1,0 +1,54 @@
+fullnameOverride: brikl-mysql
+nameOverride: ""
+cluster:
+  replicaCount: 3
+  resources:
+      requests:
+        memory: 4G
+        cpu: 500m
+      limits:
+        memory: 6G
+        cpu: 1000m
+  storage:
+    storageClassName: premium-rwo
+    size: 100Gi
+  serviceExpose:
+    create: true
+    annotations: {}
+      # cloud.google.com/load-balancer-type: "Internal"
+
+proxy:
+  replicaCount: 2
+  resources:
+      requests:
+        memory: 1G
+        cpu: 500m
+      limits:
+        memory: 1.5G
+        cpu: 800m
+  storage:
+    storageClassName: premium-rwo
+    size: 5Gi
+
+backup:
+  serviceAccount:
+    create: true
+    serviceAccountName: pepe
+    annotations: {}
+      # iam.gke.io/gcp-service-account: ""
+  storageName: "gcsbackup"
+  storages: {}
+    # gcsBackup:
+    #   type: gcs
+    #   gcs:
+    #     bucket: percona-backups-bucket
+    # s3-bucket:
+    #   type: s3
+    #   s3:
+    #     bucket: brikl-backups-pre-prd
+    #     region: us-west-2
+          # credentialsSecret: ""
+          # endpointUrl: ""
+          # useIAMRoleCredentials: true
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
