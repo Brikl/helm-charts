@@ -11,6 +11,10 @@ spec:
   pxc:
     size: {{ .Values.cluster.replicaCount }}
     image: percona/percona-xtradb-cluster:8.0.25-15.1
+    configuration: |
+      [mysqld]
+      pxc_strict_mode=PERMISSIVE
+      max_connections=2000
     resources:
 {{ toYaml .Values.cluster.resources | indent 6 }}
     volumeSpec:
@@ -28,6 +32,13 @@ spec:
     enabled: true
     size: {{ .Values.proxy.replicaCount }}
     image: percona/percona-xtradb-cluster-operator:1.13.0-proxysql
+    configuration: |
+      mysql_variables=
+      {
+        max_connections=2000
+        default_query_timeout=3600000
+        have_ssl=false
+      }
     resources:
 {{ toYaml .Values.proxy.resources | indent 6 }}
     volumeSpec:

@@ -27,7 +27,8 @@ ingress:
         - path: /
           pathType: Prefix
           rabbitManagementPort: 15672
-  tls:
-   - secretName: certmanager-tls
-     hosts:
-       - rabbitmq.internal.qa2.brikl.com
+  # tls:
+  #  - secretName: certmanager-tls
+  #    hosts:
+  #      - rabbitmq.internal.qa2.brikl.com
+  tls: []
